@@ -5,7 +5,10 @@ from django.shortcuts import render
 
 
 def home(request):
-	return render(request, 'blog_app/home.html')
+	data= {
+		'page_name' : 'home'.title(),
+	}
+	return render(request, 'blog_app/home.html', data)
 
 
 def about(request):
