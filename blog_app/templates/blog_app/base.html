@@ -15,8 +15,17 @@
 <body>
     {% include 'blog_app/parts/_navbar.html' %}
 
-    {% block content %}
-    {% endblock content %}
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-4">
+                {% include 'blog_app/parts/_sidebar.html' %}
+            </div>
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
 
     {% include 'blog_app/parts/_footer.html' %}
 
