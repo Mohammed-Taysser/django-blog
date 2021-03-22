@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% if page_name %}{{ page_name }}{% else %} name {% endif %}</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    {% include 'blog_app/parts/_navbar.html' %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% include 'blog_app/parts/_footer.html' %}
+
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
