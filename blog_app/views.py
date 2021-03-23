@@ -1,12 +1,19 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
+from . import models
 
 # Create your views here.
 
 
+def detail(request, question_id):
+	question = get_object_or_404(models.Post, pk=question_id)
+	return render(request, '', {'question': question})
+
+
 def home(request):
-	data= {
-		'page_name' : 'home'.title(),
+	data = {
+		'page_name': 'home'.title(),
+		'db_objects_posts': models.Post.objects.all().order_by('-date_update')[:5],
+		'db_objects_posts_3': models.Post.objects.all().order_by('-date_update')[:3],
 	}
 	return render(request, 'blog_app/home.html', data)
 
@@ -15,7 +22,11 @@ def about(request):
 	return render(request, 'blog_app/about.html')
 
 
-def details(request):
+def details(request, post_id):
+	data = {
+		'page_name': 'post-details',
+		'current_post': get_object_or_404(models.Post, pk=post_id),
+	}
 	return render(request, 'blog_app/details.html')
 
 

@@ -6,9 +6,9 @@
             <h4 class="card-title mb-0">latest posts</h4>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            {% for post in db_objects_posts %}
+                <li class="list-group-item d-flex justify-content-between"><a href="#" class="">{{ post.title }} </a> <small class="badge badge-info badge-pill align-self-center">new</small></li>
+            {% endfor %}
         </ul>
     </div>
     <div class="card mt-3">
