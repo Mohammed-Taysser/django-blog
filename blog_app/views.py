@@ -23,11 +23,13 @@ def about(request):
 
 
 def details(request, post_id):
+	current_post = get_object_or_404(models.Post, pk=post_id)
 	data = {
-		'page_name': 'post-details',
-		'current_post': get_object_or_404(models.Post, pk=post_id),
+		'current_post': current_post,
+		'page_name': current_post.title.title(),
+		'db_objects_posts': models.Post.objects.all().order_by('-date_update')[:5],
 	}
-	return render(request, 'blog_app/details.html')
+	return render(request, 'blog_app/post_details.html', data)
 
 
 def delete_post(request):

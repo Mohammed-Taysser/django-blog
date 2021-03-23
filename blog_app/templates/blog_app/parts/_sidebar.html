@@ -7,7 +7,7 @@
         </div>
         <ul class="list-group list-group-flush">
             {% for post in db_objects_posts %}
-                <li class="list-group-item d-flex justify-content-between"><a href="#" class="">{{ post.title }} </a> <small class="badge badge-info badge-pill align-self-center">new</small></li>
+                <li class="list-group-item d-flex justify-content-between"><a href="{% url 'post_details' post.id %}" class="">{{ post.title }} </a> <small class="badge badge-info badge-pill align-self-center">new</small></li>
             {% endfor %}
         </ul>
     </div>
