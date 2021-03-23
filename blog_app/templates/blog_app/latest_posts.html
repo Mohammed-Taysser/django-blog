@@ -1,0 +1,8 @@
+
+{% if latest_posts %}
+    {% for post in latest_posts %}
+        <li class="list-group-item d-flex justify-content-between"><a href="{% url 'post_details' post.id %}" class="">{{ post.title }} </a> <small class="badge {% cycle 'badge-primary' 'badge-warning' %} badge-pill align-self-center">new</small></li>
+    {% endfor %}
+{% else %}
+    <li class="list-group-item">no posts yet</li>
+{% endif %}

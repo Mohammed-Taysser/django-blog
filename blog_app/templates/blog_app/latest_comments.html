@@ -1,0 +1,8 @@
+
+{% if latest_comments %}
+    {% for comment in latest_comments %}
+        <li class="list-group-item d-flex justify-content-between"><a href="{% url 'post_details' comment.id %}" class="">{{ comment.content|truncatewords:3 }} </a> <small class="badge {% cycle 'badge-primary' 'badge-warning' %} badge-pill align-self-center">new</small></li>
+    {% endfor %}
+{% else %}
+    <li class="list-group-item">no comments yet</li>
+{% endif %}

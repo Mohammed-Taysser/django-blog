@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Tajawal;
+    src: url("../fonts/Tajawal/Tajawal-Regular.ttf")
+    format('truetype'), local('Tajawal');
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../fonts/Montserrat/Montserrat-Regular.ttf")
+    format('truetype'), local('Montserrat');
+}
+
+body{
+    text-transform: capitalize;
+    font-family: Montserrat, sans-serif;
+}
+
+.nice-shadow {
+    box-shadow: 0 3px 15px rgba(22, 41, 124, 0.1);
+  }

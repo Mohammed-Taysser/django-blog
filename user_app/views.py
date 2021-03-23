@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
+from .forms import UserCreationForm
 
 # Create your views here.
+app_name = 'user_app'
 
 
 def login(request):
@@ -21,4 +22,8 @@ def update_profile(request):
 
 
 def register(request):
-	return render(request, 'user_app/register.html')
+	data = {
+		'page_name': 'register'.title(),
+		'user_form': UserCreationForm(),
+	}
+	return render(request, 'user_app/register.html', data)
