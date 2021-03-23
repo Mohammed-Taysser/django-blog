@@ -1,6 +1,7 @@
 from django.contrib import admin
 from . import models
 
+
 # Register your models here.
 
 
@@ -18,4 +19,11 @@ class PostChangeViewOrder(admin.ModelAdmin):
     search_fields = ['title']
 
 
+class CommentChangeView(admin.ModelAdmin):
+    list_display = ['name', 'email', 'date', 'active', 'post']
+    search_fields = ['name']
+
+
 admin.site.register(models.Post, PostChangeViewOrder)
+
+admin.site.register(models.Comment, CommentChangeView)
