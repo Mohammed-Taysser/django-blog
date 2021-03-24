@@ -1,15 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from . forms import NewComment
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 # Create your views here.
 
 
 def home(request):
+	db_objects_posts = models.Post.objects.all().order_by('-date_update')
+	paginator = Paginator(db_objects_posts, 5)
+	current_page = request.GET.get('page')
+	try:
+		db_objects_posts = paginator.page(current_page)
+	except PageNotAnInteger:
+		db_objects_posts = paginator.page(1)
+	except EmptyPage:
+		db_objects_posts = paginator.page(paginator.num_pages)
 	data = {
 		'page_name': 'home'.title(),
-		'db_objects_posts': models.Post.objects.all().order_by('-date_update')[:5],
-		'db_objects_posts_3': models.Post.objects.all().order_by('-date_update')[:3],
+		'db_objects_posts': db_objects_posts,
 		'db_objects_comments': models.Comment.objects.filter(active=True),
+		'page': current_page,
 	}
 	return render(request, 'blog_app/home.html', data)
 

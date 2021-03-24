@@ -22,7 +22,7 @@
     </div>
 </div>
     <div class="nice-shadow my-3 border border-muted rounded p-3">
-        <h3 class="my-3 pb-2 border-bottom">total posts [{{ db_posts_objects.count}}]</h3>
+        <h3 class="my-3 pb-2 border-bottom">total posts [{{ db_posts_objects_number.count}}]</h3>
         <ul class="list-inline m-0">
             {% for post in db_posts_objects %}
                 <li class="list-inline-item"><a href="{% url 'blog_app:post_details' post.id %}">{{ post.title}}</a></li>
@@ -30,16 +30,10 @@
                     <h3 class="mt-4 text-center">no posts yet</h3>
             {% endfor %}
         </ul>
-        {% if db_posts_objects.count >= 10 %}
-            <nav aria-label="..." class="mt-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active" aria-current="page"><span class="page-link">2</span></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+        {% if db_posts_objects_number.count >= 20 %}
+            <div class="mt-5">
+                {% include 'blog_app/_pagination.html' with page=db_posts_objects %}
+            </div>
         {% endif %}
     </div>
 

@@ -5,7 +5,7 @@
     <div class="container">
 {#        <h3 class="my-5 display-2 text-center text-primary">home</h3>#}
         <h3 class="my-3 display-4 text-center text-primary">latest posts</h3>
-    {% for post in db_objects_posts_3 %}
+    {% for post in db_objects_posts %}
         <div class="media my-3 ">
             <img src="{{ post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-1" alt="user {{ post.author }} img" width="100px" height="100px">
             <div class="media-body pt-3">
@@ -16,5 +16,6 @@
         <p class="mt-4" style="line-height: 1.5;text-align: justify;">{{ post.content|truncatechars:80 }}</p>
         <hr class="my-5">
     {% endfor %}
+    {% include "blog_app/_pagination.html" with page=db_objects_posts %}
     </div>
 {% endblock content %}
