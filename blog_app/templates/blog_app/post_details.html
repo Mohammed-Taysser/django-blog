@@ -6,7 +6,7 @@
     <div class="container">
 {#        <h3 class="my-5 display-2 text-center text-primary">details</h3>#}
         <div class="media my-3 ">
-            <img src="{% static 'blog_app/img/favicon.ico' %}" class="align-self-start mr-3 rounded-circle border-muted border p-2" alt="user {{ current_post.author }} img" width="150px" height="150px">
+            <img src="{{ current_post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-2" alt="user {{ current_post.author }} img" width="150px" height="150px">
             <div class="media-body pt-3">
                 <h3 class="mt-0 ">{{  current_post.title }}</h3>
                 <p class="h6 pt-2 d-flex justify-content-between"> create {{ current_post.date_create|date:'d / m / Y' }} <span>last update {{ current_post.date_update|timesince }}</span></p>
@@ -21,7 +21,7 @@
                 {% for comment in db_objects_comments %}
                     <div class="comment my-3 p-3 bg-white border rounded border-muted nice-shadow">
                         <div class="media">
-                            <img src="{% static 'blog_app/img/favicon.ico' %}" class="align-self-start mr-3 rounded-circle border-muted border p-2" alt="user photo" width="60px" height="60px">
+                            <img src="{{ comment.post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-1" alt="user photo" width="60px" height="60px">
                             <div class="media-body">
                                 <h5 class="mt-1">{{ comment.name}}</h5>
                                 <small class="d-block">since {{ comment.date|timesince }}</small>

@@ -7,9 +7,9 @@
         <h3 class="my-3 display-4 text-center text-primary">latest posts</h3>
     {% for post in db_objects_posts_3 %}
         <div class="media my-3 ">
-            <img src="{% static 'blog_app/img/favicon.ico' %}" class="align-self-start mr-3 rounded-circle border-muted border p-2" alt="user {{ post.author }} img" width="100px" height="100px">
+            <img src="{{ post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-1" alt="user {{ post.author }} img" width="100px" height="100px">
             <div class="media-body pt-3">
-                <h3 class="mt-0 d-flex justify-content-between"><a href="{% url 'post_details' post.id %}" class="text-dark">{{  post.title }}</a>  <span class="h6 pt-2"> create {{ post.date_create|date:'d / m / Y' }}</span></h3>
+                <h3 class="mt-0 d-flex justify-content-between"><a href="{% url 'blog_app:post_details' post.id %}" class="text-dark">{{  post.title }}</a>  <span class="h6 pt-2"> create {{ post.date_create|date:'d / m / Y' }}</span></h3>
                 <h6 class="mt-0">by {{  post.author }} <span class="ml-3 text-info">last update {{ post.date_update|timesince }}</span></h6>
             </div>
         </div>

@@ -3,6 +3,9 @@
 
 {% block content %}
     <div class="container">
-        <h3 class="my-5 display-2 text-center text-primary">logout</h3>
+        <h3 class="my-3 mb-5 display-4 text-center text-primary">logout</h3>
+        <p class="text-info">you had been logout correctly</p>
+    <p class="mt-4 text-center"><a href="{% url 'user_app:login' %}">login</a> <span class="ml-3"><a
+            href="{% url 'user_app:register' %}">register</a></span></p>
     </div>
 {% endblock content %}
