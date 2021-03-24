@@ -1,4 +1,4 @@
-{% extends 'user_app/../../../templates/base.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% load static %}
@@ -12,7 +12,7 @@
                 {{ user_form|crispy }}
                 <input type="submit" value="Register" class="mt-3 btn-primary btn btn-block">
             </form>
-            <p class="text-muted mt-4">already hav an account  <a href="#">login</a></p>
+            <p class="text-muted mt-4">already have an account  <a href="{% url 'user_app:login' %}">login</a></p>
         </div>
     </div>
 {% endblock content %}

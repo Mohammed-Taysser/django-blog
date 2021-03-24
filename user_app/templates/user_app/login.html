@@ -1,8 +1,18 @@
-{% extends 'user_app/../../../templates/base.html' %}
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
     <div class="container">
-        <h3 class="my-5 display-2 text-center text-primary">login</h3>
+        <h3 class="my-3 display-4 text-center text-primary">login</h3>
+        <div class="mt-5 border rounded nice-shadow border-muted p-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ user_form|crispy }}
+                <input type="submit" value="Login" class="mt-3 btn-primary btn btn-block">
+            </form>
+            <p class="text-muted mt-4">don't have an account  <a href="{% url 'user_app:register' %}">register</a></p>
+        </div>
     </div>
 {% endblock content %}
