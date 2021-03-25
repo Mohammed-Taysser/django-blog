@@ -72,6 +72,7 @@ def profile_user(request):
 	}
 	return render(request, 'user_app/profile.html', data)
 
+
 @login_required(login_url='user_app:login')
 def update_profile(request):
 	if request.method == 'POST':

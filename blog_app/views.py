@@ -2,8 +2,20 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from . forms import NewComment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+	model = models.Post
+	fields = ['title', 'content']
+	template_name = 'blog_app/new_post.html'
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
 
 
 def home(request):
