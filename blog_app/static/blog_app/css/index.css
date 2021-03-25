@@ -20,6 +20,11 @@ body{
   }
 
 
+.about-text p, .about-text ul li {
+  line-height: 2;
+}
+
+
 .profile-container.pre-enter {
   transform-origin: center center;
   transform: scaleY(0);

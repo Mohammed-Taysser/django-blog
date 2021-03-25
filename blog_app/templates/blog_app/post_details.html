@@ -13,7 +13,7 @@
                     {% if current_post.author == user %}
                         <div class="text-right">
                         <a href="{% url 'blog_app:update_post' current_post.id %}" class="btn btn-primary mr-3">edit</a>
-                        <button class="btn btn-outline-danger">delete</button>
+                        <a href="{% url 'blog_app:delete_post' current_post.id %}" class="btn btn-outline-danger">delete</a>
                     </div>
                     {% endif %}
                 </div>
@@ -27,7 +27,7 @@
         <div class="bg-light p-3">
             {% if db_objects_comments %}
                 {% for comment in db_objects_comments %}
-                    <div class="comment my-3 p-3 bg-white border rounded border-muted nice-shadow">
+                    <div class="comment my-3 p-3 bg-white border rounded border-muted nice-shadow" >
                         <div class="media">
                             <img src="{{ comment.post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-1" alt="user photo" width="60px" height="60px">
                             <div class="media-body">

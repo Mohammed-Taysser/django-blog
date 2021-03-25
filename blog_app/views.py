@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from . forms import NewComment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
@@ -33,6 +33,20 @@ class PostUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
 			return True
 		else:
 			return False
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
+	model = models.Post
+	success_url = '/'
+	template_name = 'blog_app/delete_post.html'
+
+	def test_func(self):
+		current_post = self.get_object()
+		if self.request.user == current_post.author:
+			return True
+		else:
+			return False
+
 
 def home(request):
 	db_objects_posts = models.Post.objects.all().order_by('-date_update')

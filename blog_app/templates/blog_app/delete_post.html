@@ -1,7 +1,18 @@
-{% extends 'base.html' %}{% load static %}
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
     <div class="container">
-        <h3 class="my-5 display-2 text-center text-primary">delete post</h3>
+        <div class="mt-5 border rounded nice-shadow border-muted p-4 ">
+            <h3 class="mt-3 mb-5 display-4 text-center text-primary">are you sure to delete <small class="text-muted">"{{ object.title }}"</small></h3>
+            <hr class="my-5">
+            <form action="" method="post" class="px-3 d-flex justify-content-between">
+                {% csrf_token %}
+                <a href="{% url 'blog_app:post_details' object.id %}" class="btn-primary btn mr-3">back</a>
+                <input type="submit" value="yes, Delete" class="btn-outline-danger btn">
+            </form>
+        </div>
     </div>
 {% endblock content %}
