@@ -8,7 +8,15 @@
         <div class="media my-3 ">
             <img src="{{ current_post.author.userprofile.image.url }}" class="align-self-start mr-3 rounded-circle border-muted border p-2" alt="user {{ current_post.author }} img" width="150px" height="150px">
             <div class="media-body pt-3">
-                <h3 class="mt-0 ">{{  current_post.title }}</h3>
+                <div class="d-flex mb-3 justify-content-between align-items-center">
+                    <h3 class="mt-0 ">{{  current_post.title }}</h3>
+                    {% if current_post.author == user %}
+                        <div class="text-right">
+                        <a href="{% url 'blog_app:update_post' current_post.id %}" class="btn btn-primary mr-3">edit</a>
+                        <button class="btn btn-outline-danger">delete</button>
+                    </div>
+                    {% endif %}
+                </div>
                 <p class="h6 pt-2 d-flex justify-content-between"> create {{ current_post.date_create|date:'d / m / Y' }} <span>last update {{ current_post.date_update|timesince }}</span></p>
                 <p>by {{  current_post.author }} </p>
 {#                <p>last update {{ current_post.date_update|timesince }}</p>#}

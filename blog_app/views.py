@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from . forms import NewComment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
@@ -17,6 +17,22 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
 
+
+class PostUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+	model = models.Post
+	fields = ['title', 'content']
+	template_name = 'blog_app/update_post.html'
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
+
+	def test_func(self):
+		current_post = self.get_object()
+		if self.request.user == current_post.author:
+			return True
+		else:
+			return False
 
 def home(request):
 	db_objects_posts = models.Post.objects.all().order_by('-date_update')
