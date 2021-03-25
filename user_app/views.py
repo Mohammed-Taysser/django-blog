@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserCreationForm, LoinForm
+from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from blog_app import models
@@ -72,10 +72,24 @@ def profile_user(request):
 	}
 	return render(request, 'user_app/profile.html', data)
 
-
+@login_required(login_url='user_app:login')
 def update_profile(request):
+	if request.method == 'POST':
+		user_form = UserUpdateForm(request.POST ,instance=request.user)
+		user_profile_image = ProfileUpdateImage(request.POST, request.FILES, instance=request.user.userprofile)
+		if user_form.is_valid() and user_profile_image.is_valid():
+			user_form.save()
+			user_profile_image.save()
+			messages.success(request, 'profile update')
+			return redirect('user_app:profile')
+	else:
+		user_form = UserUpdateForm(instance=request.user)
+		user_profile_image = ProfileUpdateImage(instance=request.user.userprofile)
 	data = {
 		'page_name': 'update profile'.title(),
+		'user_form': user_form,
+		'user_profile_image': user_profile_image,
+		'user_v': user_profile_image.is_valid()
 	}
 	return render(request, 'user_app/update_profile.html', data)
 
